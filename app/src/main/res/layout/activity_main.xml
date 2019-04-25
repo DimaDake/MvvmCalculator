@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CalculatorActivity">
+
+    <EditText
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        tools:text="140"
+        android:gravity="right"
+        android:padding="12dp"/>
+
+    <GridLayout
+        android:id="@+id/buttonGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:rowCount="3">
+
+        <Button
+            style="@style/MyButton"
+            android:text="7" />
+
+        <Button
+            style="@style/MyButton"
+            android:text="8" />
+
+        <Button
+            style="@style/MyButton"
+            android:text="9" />
+
+        <Button
+            style="@style/MyButton"
+            android:text="4" />
+
+        <Button
+            style="@style/MyButton"
+            android:text="5" />
+
+        <Button
+            style="@style/MyButton"
+            android:text="6" />
+
+        <Button
+            style="@style/MyButton"
+            android:text="1" />
+
+        <Button
+            style="@style/MyButton"
+            android:text="2" />
+
+        <Button
+            style="@style/MyButton"
+            android:text="3"/>
+
+        <Button
+            style="@style/MyButton"
+            android:text='+' />
+
+        <Button
+            style="@style/MyButton"
+            android:text='0' />
+
+        <Button
+            style="@style/MyButton"
+            android:text='=' />
+
+        <Button
+            style="@style/MyButton"
+            android:text='-' />
+
+        <Button
+            style="@style/MyButton"
+            android:text='AC' />
+
+        <Space />
+
+    </GridLayout>
+
+</LinearLayout>
