@@ -12,3 +12,6 @@
 * Далее нужно имплементировать методы в заготовке CalculatorViewModel и использовать там CalculatorModel
 * Написать тесты на CalculatorViewModel
 * Связать CalculatorActivity (с activity_main.xml)  и CalculatorViewModel
+
+
+![activity_main.xml](Screenshot_20190425-135217.png)
