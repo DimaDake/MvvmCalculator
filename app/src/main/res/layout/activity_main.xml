@@ -1,87 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CalculatorActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <EditText
-        android:background="@android:color/white"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.viewmodel.CalculatorViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        tools:text="140"
-        android:gravity="right"
-        android:padding="12dp"/>
+        android:layout_height="match_parent">
 
-    <GridLayout
-        android:id="@+id/buttonGrid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:columnCount="3"
-        android:rowCount="3">
+        <TextView
+            android:background='@{viewModel.correctExprLiveData ? @drawable/textview_bg : @drawable/textview_error_bg }'
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:gravity="right"
+            android:padding="12dp"
+            android:text='@{viewModel.screenLiveData}'
+            tools:text="140"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text="7" />
+        <GridLayout
+            android:id="@+id/buttonGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:columnCount="3"
+            android:rowCount="3">
 
-        <Button
-            style="@style/MyButton"
-            android:text="8" />
+            <Button
+                style="@style/MyButton"
+                android:text="7"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('7')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text="9" />
+            <Button
+                style="@style/MyButton"
+                android:text="8"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('8')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text="4" />
+            <Button
+                style="@style/MyButton"
+                android:text="9"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('9')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text="5" />
+            <Button
+                style="@style/MyButton"
+                android:text="4"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('4')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text="6" />
+            <Button
+                style="@style/MyButton"
+                android:text="5"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('5')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text="1" />
+            <Button
+                style="@style/MyButton"
+                android:text="6"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('6')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text="2" />
+            <Button
+                style="@style/MyButton"
+                android:text="1"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('1')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text="3"/>
+            <Button
+                style="@style/MyButton"
+                android:text="2"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('2')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text='+' />
+            <Button
+                style="@style/MyButton"
+                android:text="3"
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('3')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text='0' />
+            <Button
+                style="@style/MyButton"
+                android:text='+'
+                android:onClick="@{() -> viewModel.onPlusButtonClicked()}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text='=' />
+            <Button
+                style="@style/MyButton"
+                android:text='0'
+                android:onClick="@{() -> viewModel.onDigitButtonClicked('0')}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text='-' />
+            <Button
+                style="@style/MyButton"
+                android:text='='
+                android:onClick="@{() -> viewModel.onEqualsButtonClicked()}"/>
 
-        <Button
-            style="@style/MyButton"
-            android:text='AC' />
+            <Button
+                style="@style/MyButton"
+                android:text='-'
+                android:onClick="@{() -> viewModel.onMinusButtonClicked()}"/>
 
-        <Space />
 
-    </GridLayout>
+            <Button
+                style="@style/MyButton"
+                android:text='AC'
+                android:onClick="@{() -> viewModel.onAcButtonClicked()}"/>
 
-</LinearLayout>
+            <Space />
+
+        </GridLayout>
+
+    </LinearLayout>
+</layout>
