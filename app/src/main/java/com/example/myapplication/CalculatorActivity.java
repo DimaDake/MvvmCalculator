@@ -1,28 +1,26 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.widget.EditText;
+
+import com.example.myapplication.databinding.ActivityMainBinding;
 
 public class CalculatorActivity extends AppCompatActivity {
 
-    private CalculatorViewModel calcViewModel = new CalculatorViewModel();
-    private EditText display;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        display = findViewById(R.id.activity_main__display);
-        calcViewModel.getScreenLiveData().observe(this,calcResultObserver);
-    }
 
-    private final Observer <String> calcResultObserver = new Observer<String>() {
-        @Override
-        public void onChanged(String result) {
-            display.setText(result);
-        }
-    };
+        CalculatorViewModel calcViewModel = ViewModelProviders.of(this, new ViewModelFactory())
+                .get(CalculatorViewModel.class);
+
+        final ActivityMainBinding activityMainBinding =
+                DataBindingUtil.setContentView(this, R.layout.activity_main);
+        activityMainBinding.setLifecycleOwner(this);
+        activityMainBinding.setViewModel(calcViewModel);
+    }
 }

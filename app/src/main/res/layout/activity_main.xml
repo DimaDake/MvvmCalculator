@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            tools:text="140"
+            tools:text="@{viewModel.getScreenLiveData}"
             android:gravity="right"
             android:padding="12dp"
             tools:ignore="Autofill,LabelFor,RtlHardcoded,TextFields" />
