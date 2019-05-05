@@ -11,6 +11,12 @@ public class Calculator {
     private char operator;
     private State state;
 
+    public Calculator() {
+        StateComponent stateComponent = DaggerStateComponent.create();
+        state = stateComponent.getStateX();
+        state.clear(this);
+    }
+
     public void setState(State state) {
         this.state = state;
     }
@@ -25,12 +31,6 @@ public class Calculator {
 
     public State getState() {
         return state;
-    }
-
-    public Calculator() {
-        StateComponent stateComponent = DaggerStateComponent.create();
-        state = stateComponent.getStateX();
-        state.clear(this);
     }
 
     public long getX() {
@@ -95,6 +95,10 @@ public class Calculator {
                 break;
         }
     }
+    public void onResetClick() {
+        onKeyDown('C');
+    }
+
     public long result(String input){
         for (char key : input.toCharArray()) {
             onKeyDown(key);
