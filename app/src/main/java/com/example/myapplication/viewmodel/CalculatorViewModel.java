@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.myapplication.model.CalculatorModel;
 
-import static com.example.myapplication.model.CalculatorModel.*;
+import static com.example.myapplication.model.CalculatorModel.Operation;
 
 public class CalculatorViewModel extends ViewModel {
 
