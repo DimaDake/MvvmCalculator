@@ -31,7 +31,7 @@ public TestRule rule = new InstantTaskExecutorRule();
 ```java
     @Before
     public void setup() {
-        calculatorViewModel = new CalculatorViewModel();
+        calculatorViewModel = new CalculatorViewModel(сalculatorModel);
     }
 ```
 
