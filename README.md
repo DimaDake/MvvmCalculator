@@ -26,5 +26,14 @@
 public TestRule rule = new InstantTaskExecutorRule();
 ```
 
+Чтобы InstantTaskExecutorRule применился до инициализации ViewModel, нужно инициализировать ViewModel в методе Before
+
+```java
+    @Before
+    public void setup() {
+        calculatorViewModel = new CalculatorViewModel();
+    }
+```
+
 
 ![activity_main.xml](Screenshot_20190425-135217.png)
