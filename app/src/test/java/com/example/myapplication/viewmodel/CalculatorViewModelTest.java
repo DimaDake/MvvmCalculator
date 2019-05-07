@@ -13,6 +13,8 @@ import org.junit.rules.TestRule;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.Random;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -26,11 +28,13 @@ public class CalculatorViewModelTest {
     Calculator calculator;
 
     private CalculatorViewModel viewModel;
+    private Random random;
 
     @Before
     public void init() {
         calculator = new Calculator();
         viewModel = new CalculatorViewModel(calculator);
+        random = new Random();
     }
 
     private void checkOperation(final Operation operation) {
@@ -99,6 +103,7 @@ public class CalculatorViewModelTest {
             viewModel.onDigitButtonClicked(value.charAt(i));
         }
         checkValueOnScreen(Integer.MAX_VALUE);
+        verify(calculator).setValue(Integer.MAX_VALUE);
         viewModel.onPlusButtonClicked();
         checkOperation(Operation.PLUS);
 
@@ -107,7 +112,34 @@ public class CalculatorViewModelTest {
         }
         checkValueOnScreen(Integer.MAX_VALUE);
         viewModel.onEqualsButtonClicked();
+        verify(calculator).add(Integer.MAX_VALUE);
         checkValueOnScreen((long) Integer.MAX_VALUE + Integer.MAX_VALUE);
     }
+
+
+    @Test
+    public void randomTest() {
+        long value = random.nextInt();
+        verify(calculator).setValue(value);
+        for (int i = 0; i < 100; i++) {
+            int x = random.nextInt();
+            if (random.nextBoolean()) {
+                viewModel.onPlusButtonClicked();
+                checkOperation(Operation.PLUS);
+                checkValueOnScreen(value);
+                value += x;
+                verify(calculator).add(x);
+            } else {
+                viewModel.onMinusButtonClicked();
+                checkOperation(Operation.MINUS);
+                checkValueOnScreen(value);
+                value -= x;
+                verify(calculator).minus(x);
+            }
+        }
+        viewModel.onEqualsButtonClicked();
+        checkValueOnScreen(value);
+    }
+
 
 }
