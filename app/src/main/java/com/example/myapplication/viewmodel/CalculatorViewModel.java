@@ -10,16 +10,17 @@ import com.example.myapplication.model.Operation;
 public class CalculatorViewModel extends ViewModel {
     private final MutableLiveData<String> valueOnScreen;
     private final MutableLiveData<Operation> operation;
-    private final MutableLiveData<Calculator> calculatorData;
+    private final Calculator calculator;
 
     private boolean donePrevious;
     private boolean writeNewValue;
 
     public CalculatorViewModel() {
-        calculatorData = new MutableLiveData<>();
+        this(new Calculator());
+    }
 
-        calculatorData.setValue(new Calculator());
-
+    public CalculatorViewModel(final Calculator calculator) {
+        this.calculator = calculator;
         operation = new MutableLiveData<>();
         operation.setValue(Operation.PLUS);
 
@@ -34,7 +35,7 @@ public class CalculatorViewModel extends ViewModel {
         return valueOnScreen;
     }
 
-    public void onDigitButtonClicked(char digit) {
+    public void onDigitButtonClicked(final char digit) {
         if (!Character.isDigit(digit)) {
             return;
         }
@@ -46,11 +47,7 @@ public class CalculatorViewModel extends ViewModel {
         valueOnScreen.setValue(valueOnScreen.getValue() + digit);
     }
 
-    public void onPlusButtonClicked() /*throws IllegalStateException */ {
-        if (valueOnScreen.getValue() == null) {
-//            throw new IllegalStateException("Value is not ready");
-            return;
-        }
+    public void onPlusButtonClicked() {
         onEqualsButtonClicked();
         operation.setValue(Operation.PLUS);
     }
@@ -59,8 +56,6 @@ public class CalculatorViewModel extends ViewModel {
         if (operation.getValue() == null) {
             return;
         }
-        Calculator calculator = calculatorData.getValue();
-        assert calculator != null;
         switch (operation.getValue()) {
             case PLUS:
                 calculator.add(getLongValueOnScreen());
@@ -76,10 +71,6 @@ public class CalculatorViewModel extends ViewModel {
     }
 
     public void onMinusButtonClicked() {
-        if (valueOnScreen.getValue() == null || valueOnScreen.getValue().length() == 0) {
-//            throw new IllegalStateException("Value is not ready");
-            return;
-        }
         onEqualsButtonClicked();
         operation.setValue(Operation.MINUS);
     }
@@ -93,8 +84,6 @@ public class CalculatorViewModel extends ViewModel {
 
     public void onAcButtonClicked() {
         valueOnScreen.postValue("0");
-        Calculator calculator = calculatorData.getValue();
-        assert calculator != null;
         calculator.setValue(0);
     }
 
@@ -102,5 +91,9 @@ public class CalculatorViewModel extends ViewModel {
         String value = valueOnScreen.getValue();
         assert value != null;
         return value.length() > 0 ? Long.parseLong(value) : 0;
+    }
+
+    public Operation getOperation() {
+        return operation.getValue();
     }
 }

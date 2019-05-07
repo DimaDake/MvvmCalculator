@@ -16,7 +16,7 @@ public class CalculatorActivity extends AppCompatActivity {
     private EditText editText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.activity_main_edit_text);
@@ -28,8 +28,8 @@ public class CalculatorActivity extends AppCompatActivity {
         editText.setText(s);
     }
 
-    public void onClick(View view) {
-        char symbol = view.getTag().toString().charAt(0);
+    public void onClick(final View view) {
+        final char symbol = view.getTag().toString().charAt(0);
         if (Character.isDigit(symbol)) {
             viewModel.onDigitButtonClicked(symbol);
             return;
@@ -49,7 +49,6 @@ public class CalculatorActivity extends AppCompatActivity {
                 viewModel.onAcButtonClicked();
                 break;
         }
-
     }
 
 }

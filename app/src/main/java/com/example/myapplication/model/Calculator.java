@@ -2,14 +2,13 @@ package com.example.myapplication.model;
 
 public class Calculator {
 
-
     private long value;
 
     public Calculator() {
         this(0);
     }
 
-    public Calculator(int value) {
+    public Calculator(final int value) {
         this.value = value;
     }
 
@@ -17,15 +16,15 @@ public class Calculator {
         return value;
     }
 
-    public void setValue(long value) {
+    public void setValue(final long value) {
         this.value = value;
     }
 
-    public void add(long x) {
+    public void add(final long x) {
         value += x;
     }
 
-    public void minus(long x) {
+    public void minus(final long x) {
         value -= x;
     }
 
