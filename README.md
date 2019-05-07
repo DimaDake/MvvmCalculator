@@ -35,6 +35,6 @@ public TestRule rule = new InstantTaskExecutorRule();
     }
 ```
 
-Для получения максимального бала по домашнему заданию CalculatorViewModel нужно тестировать независимо от CalculatorModel, для этого надо использовать Mockito по аналогии с тестом в https://github.com/DimaDake/ticTacToe/blob/mvp-dagger/app/src/test/java/com/acme/tictactoe/presenter/TicTacToePresenterIsolatedTests.java
+Для получения максимального балла по домашнему заданию CalculatorViewModel нужно тестировать независимо от CalculatorModel, для этого надо использовать Mockito по аналогии с тестом в https://github.com/DimaDake/ticTacToe/blob/mvp-dagger/app/src/test/java/com/acme/tictactoe/presenter/TicTacToePresenterIsolatedTests.java
 
 ![activity_main.xml](Screenshot_20190425-135217.png)
