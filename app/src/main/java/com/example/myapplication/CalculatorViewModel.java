@@ -9,20 +9,21 @@ import com.example.myapplication.model.Calculator;
 public class CalculatorViewModel extends ViewModel {
 
     private final Calculator calculator;
-    private MutableLiveData <String> result = new MutableLiveData<>();
+    private MutableLiveData <String> display = new MutableLiveData<>();
     private StringBuilder input = new StringBuilder();
 
     public CalculatorViewModel() {
-        result.setValue("0");
+        display.setValue("0");
         calculator = new Calculator();
     }
 
     public LiveData<String> getScreenLiveData() {
-        return result;
+        return display;
     }
 
     public void onDigitButtonClicked(char digit) {
         input.append(digit);
+        display.setValue(String.valueOf(input));
     }
 
     public void onPlusButtonClicked() {
@@ -36,12 +37,13 @@ public class CalculatorViewModel extends ViewModel {
     public void onEqualsButtonClicked() {
         input.append('=');
         long res = calculator.result(input.toString());
-        result.setValue(String.valueOf(res));
+        display.setValue(String.valueOf(res));
         input = new StringBuilder();
     }
 
     public void onAcButtonClicked() {
         calculator.onResetClick();
         input = new StringBuilder();
+        display.setValue("0");
     }
 }

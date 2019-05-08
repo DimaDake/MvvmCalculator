@@ -1,18 +1,17 @@
 package com.example.myapplication.state;
 
-import com.example.myapplication.app.App;
 import com.example.myapplication.model.Calculator;
 
 import javax.inject.Inject;
 
 public class StateY implements State {
 
-    private StateComponent stateComponent;
+    private final StateComponent stateComponent;
     private boolean typing = false;
 
     @Inject
     StateY(){
-        stateComponent = App.getInstance().getStateComponent();
+        stateComponent = StateComponentConfig.getInstance().getStateComponent();
     }
 
     @Override

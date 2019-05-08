@@ -1,17 +1,16 @@
 package com.example.myapplication.state;
 
-import com.example.myapplication.app.App;
 import com.example.myapplication.model.Calculator;
 
 import javax.inject.Inject;
 
 public class AnswerState implements State {
 
-    private StateComponent stateComponent;
+    private final StateComponent stateComponent;
 
     @Inject
     AnswerState(){
-        stateComponent = App.getInstance().getStateComponent();
+        stateComponent = StateComponentConfig.getInstance().getStateComponent();
     }
 
     @Override

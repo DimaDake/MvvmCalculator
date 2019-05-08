@@ -1,8 +1,8 @@
 package com.example.myapplication.model;
 
-import com.example.myapplication.state.DaggerStateComponent;
 import com.example.myapplication.state.State;
 import com.example.myapplication.state.StateComponent;
+import com.example.myapplication.state.StateComponentConfig;
 
 
 public class Calculator {
@@ -12,7 +12,7 @@ public class Calculator {
     private State state;
 
     public Calculator() {
-        StateComponent stateComponent = DaggerStateComponent.create();
+        StateComponent stateComponent = StateComponentConfig.getInstance().getStateComponent();
         state = stateComponent.getStateX();
         state.clear(this);
     }
