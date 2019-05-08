@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -36,9 +38,16 @@ public class CalculatorViewModel extends ViewModel {
 
     public void onEqualsButtonClicked() {
         input.append('=');
-        long res = calculator.result(input.toString());
-        display.setValue(String.valueOf(res));
-        input = new StringBuilder(String.valueOf(res));
+        try {
+            long res = calculator.result(input.toString());
+            display.setValue(String.valueOf(res));
+            input = new StringBuilder(String.valueOf(res));
+        }
+        catch (IllegalArgumentException e){
+            //Did not think how to cause Toast:(
+            input = new StringBuilder();
+            display.setValue("0");
+        }
     }
 
     public void onAcButtonClicked() {

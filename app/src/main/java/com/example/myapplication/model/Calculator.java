@@ -49,7 +49,7 @@ public class Calculator {
         this.y = y;
     }
 
-    private void onKeyDown(char key){
+    private void onKeyDown(char key) throws IllegalArgumentException {
         switch (key){
             case '1':
                 state.digit(this, key);
@@ -93,13 +93,15 @@ public class Calculator {
             case 'C':
                 state.clear(this);
                 break;
+            default:
+                throw new IllegalArgumentException("Ooops, bad argument");
         }
     }
     public void onResetClick() {
         onKeyDown('C');
     }
 
-    public long result(String input){
+    public long result(String input) throws IllegalArgumentException{
         for (char key : input.toCharArray()) {
             onKeyDown(key);
         }
