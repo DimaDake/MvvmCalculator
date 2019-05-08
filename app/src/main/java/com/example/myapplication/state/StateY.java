@@ -11,7 +11,7 @@ public class StateY implements State {
 
     @Inject
     StateY(){
-        stateComponent = StateComponentConfig.getInstance().getStateComponent();
+        stateComponent = StateComponentBuilder.build().get();
     }
 
     @Override

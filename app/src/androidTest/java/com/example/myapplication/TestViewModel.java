@@ -31,5 +31,14 @@ public class TestViewModel {
         calculatorViewModel.onPlusButtonClicked();
         calculatorViewModel.onDigitButtonClicked('2');
         assertEquals("20+2", calculatorViewModel.getScreenLiveData().getValue());
+        calculatorViewModel.onAcButtonClicked();
+        calculatorViewModel.onDigitButtonClicked('3');
+        calculatorViewModel.onDigitButtonClicked('0');
+        calculatorViewModel.onDigitButtonClicked('5');
+        calculatorViewModel.onMinusButtonClicked();
+        calculatorViewModel.onDigitButtonClicked('3');
+        calculatorViewModel.onDigitButtonClicked('0');
+        calculatorViewModel.onDigitButtonClicked('0');
+        assertEquals("305-300", calculatorViewModel.getScreenLiveData().getValue());
     }
 }

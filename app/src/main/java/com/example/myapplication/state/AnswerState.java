@@ -10,7 +10,7 @@ public class AnswerState implements State {
 
     @Inject
     AnswerState(){
-        stateComponent = StateComponentConfig.getInstance().getStateComponent();
+        stateComponent = StateComponentBuilder.build().get();
     }
 
     @Override

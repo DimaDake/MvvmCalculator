@@ -10,7 +10,7 @@ public class ActionState implements State {
 
     @Inject
     ActionState(){
-        stateComponent = StateComponentConfig.getInstance().getStateComponent();
+        stateComponent = StateComponentBuilder.build().get();
     }
 
     @Override

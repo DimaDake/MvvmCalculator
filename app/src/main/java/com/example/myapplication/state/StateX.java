@@ -12,7 +12,7 @@ public class StateX implements State {
 
     @Inject
     StateX(){
-        stateComponent = StateComponentConfig.getInstance().getStateComponent();
+        stateComponent = StateComponentBuilder.build().get();
     }
 
     @Override
