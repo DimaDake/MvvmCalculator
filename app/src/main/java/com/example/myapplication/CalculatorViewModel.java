@@ -38,7 +38,7 @@ public class CalculatorViewModel extends ViewModel {
         input.append('=');
         long res = calculator.result(input.toString());
         display.setValue(String.valueOf(res));
-        input = new StringBuilder();
+        input = new StringBuilder(String.valueOf(res));
     }
 
     public void onAcButtonClicked() {
