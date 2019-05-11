@@ -2,27 +2,22 @@ package com.example.myapplication.state;
 
 import com.example.myapplication.model.Calculator;
 
-import javax.inject.Inject;
-
 public class ActionState implements State {
 
-    private final StateComponent stateComponent;
-
-    @Inject
     ActionState(){
-        stateComponent = StateComponentBuilder.build().get();
+
     }
 
     @Override
     public void clear(Calculator calculator) {
-        State state = stateComponent.getStateX();
+        State state = new StateX();
         calculator.setState(state);
         calculator.getState().clear(calculator);
     }
 
     @Override
     public void digit(Calculator calculator, char key) {
-        State state = stateComponent.getStateY();
+        State state = new StateY();
         calculator.setState(state);
         calculator.getState().digit(calculator, key);
     }
@@ -34,7 +29,7 @@ public class ActionState implements State {
 
     @Override
     public void equal(Calculator calculator) {
-        State state = stateComponent.getAnswerState();
+        State state = new AnswerState();
         calculator.setState(state);
         long cmp = calculator.getX();
         calculator.setY(cmp);

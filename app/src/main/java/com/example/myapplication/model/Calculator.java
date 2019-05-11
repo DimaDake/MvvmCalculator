@@ -1,9 +1,7 @@
 package com.example.myapplication.model;
 
 import com.example.myapplication.state.State;
-import com.example.myapplication.state.StateComponent;
-import com.example.myapplication.state.StateComponentBuilder;
-
+import com.example.myapplication.state.StateX;
 
 public class Calculator {
     private long x;
@@ -12,8 +10,7 @@ public class Calculator {
     private State state;
 
     public Calculator() {
-        StateComponent stateComponent = StateComponentBuilder.build().get();
-        state = stateComponent.getStateX();
+        state = new StateX();
         state.clear(this);
     }
 
