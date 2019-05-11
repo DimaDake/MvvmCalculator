@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 public class CalculatorViewModelTest {
 
     @Rule
-    public TestRule rule = new InstantTaskExecutorRule();
+    public final TestRule rule = new InstantTaskExecutorRule();
 
     @Mock
     Calculator calculator;

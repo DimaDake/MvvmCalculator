@@ -24,8 +24,8 @@ public class CalculatorActivity extends AppCompatActivity {
         viewModel.getScreenLiveData().observe(this, this::updateScreen);
     }
 
-    private void updateScreen(String s) {
-        editText.setText(s);
+    private void updateScreen(final String text) {
+        editText.setText(text);
     }
 
     public void onClick(final View view) {
