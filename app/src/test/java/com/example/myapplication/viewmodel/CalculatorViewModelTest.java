@@ -5,20 +5,21 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import com.example.myapplication.model.Calculator;
 import com.example.myapplication.model.Operation;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Random;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CalculatorViewModelTest {
 
     @Rule
@@ -32,7 +33,6 @@ public class CalculatorViewModelTest {
 
     @Before
     public void init() {
-        calculator = new Calculator();
         viewModel = new CalculatorViewModel(calculator);
         random = new Random();
     }
@@ -44,7 +44,7 @@ public class CalculatorViewModelTest {
     private void checkValueOnScreen(final long value) {
         final String actualValue = viewModel.getScreenLiveData().getValue();
         assertNotNull(actualValue);
-        assertEquals(Long.parseLong(actualValue), value);
+        assertEquals(value, Long.parseLong(actualValue));
     }
 
     @Test
@@ -53,12 +53,10 @@ public class CalculatorViewModelTest {
         viewModel.onDigitButtonClicked('1');
         viewModel.onDigitButtonClicked('2');
         viewModel.onDigitButtonClicked('4');
-        verify(calculator).setValue(9124);
         checkValueOnScreen(9124);
-
         viewModel.onAcButtonClicked();
 
-        verify(calculator).setValue(0);
+        when(calculator.getValue()).thenReturn(0L);
         checkValueOnScreen(0);
     }
 
@@ -68,30 +66,30 @@ public class CalculatorViewModelTest {
     public void testExpression() {
         viewModel.onDigitButtonClicked('7');
         viewModel.onDigitButtonClicked('7');
-        verify(calculator).setValue(77);
         checkValueOnScreen(77);
         viewModel.onPlusButtonClicked();
         checkOperation(Operation.PLUS);
 
         viewModel.onDigitButtonClicked('3');
         checkValueOnScreen(3);
+        when(calculator.getValue()).thenReturn(80L);
         viewModel.onMinusButtonClicked();
-        verify(calculator).add(3);
         checkOperation(Operation.MINUS);
         checkValueOnScreen(80);
 
         viewModel.onDigitButtonClicked('4');
         checkValueOnScreen(4);
+        when(calculator.getValue()).thenReturn(76L);
         viewModel.onPlusButtonClicked();
-        verify(calculator).minus(4);
         checkOperation(Operation.PLUS);
+        checkValueOnScreen(76);
 
 
         viewModel.onDigitButtonClicked('2');
         viewModel.onDigitButtonClicked('3');
         checkValueOnScreen(23);
+        when(calculator.getValue()).thenReturn(99L);
         viewModel.onEqualsButtonClicked();
-        verify(calculator).add(23);
         checkValueOnScreen(99);
     }
 
@@ -103,7 +101,7 @@ public class CalculatorViewModelTest {
             viewModel.onDigitButtonClicked(value.charAt(i));
         }
         checkValueOnScreen(Integer.MAX_VALUE);
-        verify(calculator).setValue(Integer.MAX_VALUE);
+
         viewModel.onPlusButtonClicked();
         checkOperation(Operation.PLUS);
 
@@ -111,35 +109,45 @@ public class CalculatorViewModelTest {
             viewModel.onDigitButtonClicked(value.charAt(i));
         }
         checkValueOnScreen(Integer.MAX_VALUE);
+        when(calculator.getValue()).thenReturn((long) Integer.MAX_VALUE + Integer.MAX_VALUE);
         viewModel.onEqualsButtonClicked();
-        verify(calculator).add(Integer.MAX_VALUE);
         checkValueOnScreen((long) Integer.MAX_VALUE + Integer.MAX_VALUE);
     }
 
 
     @Test
     public void randomTest() {
-        long value = random.nextInt();
-        verify(calculator).setValue(value);
+        long value = random.nextInt(1000);
+        for (char digit : Long.toString(value).toCharArray()) {
+            viewModel.onDigitButtonClicked(digit);
+        }
+        checkValueOnScreen(value);
+        viewModel.onPlusButtonClicked();
+        checkOperation(Operation.PLUS);
+
         for (int i = 0; i < 100; i++) {
-            int x = random.nextInt();
+            int x = random.nextInt(1000);
+            for (char digit : Integer.toString(x).toCharArray()) {
+                viewModel.onDigitButtonClicked(digit);
+            }
+
             if (random.nextBoolean()) {
+                value += x;
+                when(calculator.getValue()).thenReturn(value);
                 viewModel.onPlusButtonClicked();
                 checkOperation(Operation.PLUS);
-                checkValueOnScreen(value);
-                value += x;
-                verify(calculator).add(x);
             } else {
+                value -= x;
+                when(calculator.getValue()).thenReturn(value);
                 viewModel.onMinusButtonClicked();
                 checkOperation(Operation.MINUS);
-                checkValueOnScreen(value);
-                value -= x;
-                verify(calculator).minus(x);
             }
+            when(calculator.getValue()).thenReturn(value);
+            checkValueOnScreen(value);
         }
+
+        when(calculator.getValue()).thenReturn(value);
         viewModel.onEqualsButtonClicked();
         checkValueOnScreen(value);
     }
-
-
 }
