@@ -10,16 +10,20 @@ public class CalculatorModel {
         this.result = INITIAL_VALUE;
     }
 
-    public void plus(long left, long right) {
-        result = left + right;
+    public void plus(long value) {
+        result += value;
     }
 
-    public void minus(long left, long right) {
-        result = left - right;
+    public void minus(long value) {
+        result -= value;
     }
 
     public long getResult() {
         return result;
+    }
+
+    public void setResult(long result) {
+        this.result = result;
     }
 
     public void reset() {

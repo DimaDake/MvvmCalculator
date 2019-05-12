@@ -25,7 +25,8 @@ public class CalculatorModelTest {
         for (int i = 0; i < 100; i++) {
             long left = getRandomValue(true);
             long right = getRandomValue(true);
-            calculatorModel.plus(left, right);
+            calculatorModel.setResult(left);
+            calculatorModel.plus(right);
             Assert.assertEquals(left + right, calculatorModel.getResult());
         }
     }
@@ -35,7 +36,8 @@ public class CalculatorModelTest {
         for (int i = 0; i < 100; i++) {
             long left = getRandomValue(true);
             long right = getRandomValue(true);
-            calculatorModel.minus(left, right);
+            calculatorModel.setResult(left);
+            calculatorModel.minus(right);
             Assert.assertEquals(left - right, calculatorModel.getResult());
         }
     }
@@ -44,7 +46,8 @@ public class CalculatorModelTest {
     public void resetTest() {
         long left = getRandomValue(true);
         long right = getRandomValue(true);
-        calculatorModel.plus(left, right);
+        calculatorModel.setResult(left);
+        calculatorModel.plus(right);
         calculatorModel.reset();
         Assert.assertEquals(0, calculatorModel.getResult());
     }

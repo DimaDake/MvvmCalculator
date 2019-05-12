@@ -8,7 +8,7 @@ public class CalculatorViewModel extends ViewModel {
 
     private MutableLiveData<String> screenLiveData;
     private final CalculatorModel calculatorModel;
-    private long leftValue;
+    private String leftValue = "0";
     private Operator lastOperator = Operator.AC;
     private boolean cleared;
 
@@ -62,7 +62,7 @@ public class CalculatorViewModel extends ViewModel {
     }
 
     public void onAcButtonClicked() {
-        leftValue = 0;
+        leftValue = "0";
         clearScreenLiveData();
         calculatorModel.reset();
         lastOperator = Operator.AC;
@@ -76,7 +76,7 @@ public class CalculatorViewModel extends ViewModel {
     private void setLeftValue() {
         String screenValue = screenLiveData.getValue();
         if (screenValue != null && !screenValue.isEmpty()) {
-            leftValue = Integer.valueOf(screenValue);
+            leftValue = screenValue;
             cleared = false;
         }
     }
@@ -86,20 +86,21 @@ public class CalculatorViewModel extends ViewModel {
         if (screenValue != null && !screenValue.isEmpty()) {
             int rightValue = Integer.valueOf(screenValue);
 
+            calculatorModel.setResult(Long.valueOf(leftValue));
             switch (lastOperator) {
                 case PLUS: {
-                    calculatorModel.plus(leftValue, rightValue);
+                    calculatorModel.plus(rightValue);
                     break;
                 }
                 case MINUS: {
-                    calculatorModel.minus(leftValue, rightValue);
+                    calculatorModel.minus(rightValue);
                     break;
                 }
             }
 
-            long result = calculatorModel.getResult();
+            String result = String.valueOf(calculatorModel.getResult());
             leftValue = result;
-            screenLiveData.setValue(String.valueOf(result));
+            screenLiveData.setValue(result);
             cleared = false;
         }
     }
