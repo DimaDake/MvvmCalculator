@@ -3,25 +3,32 @@ package com.example.myapplication;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 
+import com.example.myapplication.model.Calculator;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class TestViewModel {
+
+    @Mock
+    private Calculator calculator;
 
     @Rule
     public TestRule rule = new InstantTaskExecutorRule();
 
     private CalculatorViewModel calculatorViewModel;
 
-
     @Before
     public void setUp() {
-        calculatorViewModel = new CalculatorViewModel();
+        calculatorViewModel = new CalculatorViewModel(calculator);
     }
 
 

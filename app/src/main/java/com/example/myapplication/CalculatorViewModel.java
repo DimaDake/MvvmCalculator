@@ -19,6 +19,11 @@ public class CalculatorViewModel extends ViewModel {
         calculator = new Calculator();
     }
 
+    public CalculatorViewModel(Calculator calculator) {
+        display.setValue("0");
+        this.calculator = calculator;
+    }
+
     public LiveData<String> getScreenLiveData() {
         return display;
     }
