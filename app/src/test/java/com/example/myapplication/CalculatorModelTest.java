@@ -12,7 +12,7 @@ public class CalculatorModelTest {
 
     public CalculatorModelTest() {
         calculatorModel = new CalculatorModel();
-        random = new Random();
+        random = new Random(1L);
     }
 
     private long getRandomValue(boolean randomSign) {
