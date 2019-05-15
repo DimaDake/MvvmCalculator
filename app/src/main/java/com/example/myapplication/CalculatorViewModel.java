@@ -14,7 +14,7 @@ public class CalculatorViewModel extends ViewModel {
     private MutableLiveData <String> display = new MutableLiveData<>();
     private StringBuilder input = new StringBuilder();
 
-    public CalculatorViewModel() {
+    CalculatorViewModel() {
         display.setValue("0");
         calculator = new Calculator();
     }
