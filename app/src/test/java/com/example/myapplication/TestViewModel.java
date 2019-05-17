@@ -5,12 +5,14 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 
 import com.example.myapplication.model.Calculator;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -33,23 +35,33 @@ public class TestViewModel {
 
 
     @Test
-    public void checkState(){
+    public void addition(){
         calculatorViewModel.onDigitButtonClicked('2');
         calculatorViewModel.onDigitButtonClicked('0');
+        assertEquals("20", calculatorViewModel.getScreenLiveData().getValue());
         calculatorViewModel.onPlusButtonClicked();
         calculatorViewModel.onDigitButtonClicked('2');
+        calculatorViewModel.onDigitButtonClicked('0');
+        assertEquals("20+20", calculatorViewModel.getScreenLiveData().getValue());
         calculatorViewModel.onEqualsButtonClicked();
-        assertEquals("22", calculatorViewModel.getScreenLiveData().getValue());
+        Mockito.when(calculator.getResult()).thenReturn((long)40);
         calculatorViewModel.onAcButtonClicked();
         assertEquals("0", calculatorViewModel.getScreenLiveData().getValue());
-        calculatorViewModel.onDigitButtonClicked('3');
+    }
+    @Test
+    public void subtraction() {
+        calculatorViewModel.onDigitButtonClicked('4');
         calculatorViewModel.onDigitButtonClicked('0');
-        calculatorViewModel.onDigitButtonClicked('5');
+        calculatorViewModel.onDigitButtonClicked('0');
+        assertEquals("400", calculatorViewModel.getScreenLiveData().getValue());
         calculatorViewModel.onMinusButtonClicked();
-        calculatorViewModel.onDigitButtonClicked('3');
+        calculatorViewModel.onDigitButtonClicked('2');
         calculatorViewModel.onDigitButtonClicked('0');
         calculatorViewModel.onDigitButtonClicked('0');
+        assertEquals("400-200", calculatorViewModel.getScreenLiveData().getValue());
         calculatorViewModel.onEqualsButtonClicked();
-        assertEquals("5", calculatorViewModel.getScreenLiveData().getValue());
+        Mockito.when(calculator.getResult()).thenReturn((long) 200);
+        calculatorViewModel.onAcButtonClicked();
+        assertEquals("0", calculatorViewModel.getScreenLiveData().getValue());
     }
 }

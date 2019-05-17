@@ -104,4 +104,8 @@ public class Calculator {
         }
         return x;
     }
+
+    public long getResult() {
+        return x;
+    }
 }
