@@ -4,23 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.myapplication.model.evaluators.Evaluator;
-import com.example.myapplication.model.expressions.ArithmeticExpression;
+import com.example.myapplication.model.CalculatorModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     @NonNull
-    private final ArithmeticExpression expression;
+    private final CalculatorModel calculatorModel;
 
-    @NonNull
-    private final Evaluator evaluator;
-
-    public ViewModelFactory(
-            @NonNull final ArithmeticExpression expression,
-            @NonNull final Evaluator evaluator) {
+    public ViewModelFactory(@NonNull final CalculatorModel calculatorModel) {
         super();
-        this.expression = expression;
-        this.evaluator = evaluator;
+        this.calculatorModel = calculatorModel;
     }
 
     @SuppressWarnings("unchecked")
@@ -28,7 +21,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass == CalculatorViewModel.class) {
-            return (T) new CalculatorViewModel(expression, evaluator);
+            return (T) new CalculatorViewModel(calculatorModel);
         } else {
             throw new IllegalArgumentException("ViewModel Not Found");
         }

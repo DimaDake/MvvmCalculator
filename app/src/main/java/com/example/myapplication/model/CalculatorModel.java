@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import com.example.myapplication.model.evaluators.Evaluator;
 import com.example.myapplication.model.expressions.ArithmeticExpression;
 
-public final class CalculatorModel {
+public class CalculatorModel {
 
     @NonNull
     private ArithmeticExpression expression;

@@ -17,10 +17,8 @@ public class CalculatorViewModel extends ViewModel {
     private final MutableLiveData<String> screenLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> correctExprLiveData = new MutableLiveData<>();
 
-    public CalculatorViewModel(
-            @NonNull final ArithmeticExpression expression,
-            @NonNull final Evaluator evaluator) {
-        calculatorModel = new CalculatorModel(expression, evaluator);
+    public CalculatorViewModel(@NonNull final CalculatorModel calculatorModel) {
+        this.calculatorModel = calculatorModel;
         correctExprLiveData.setValue(true);
     }
 
