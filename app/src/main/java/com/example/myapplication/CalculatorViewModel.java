@@ -19,7 +19,7 @@ public class CalculatorViewModel extends ViewModel {
         calculator = new Calculator();
     }
 
-    public CalculatorViewModel(Calculator calculator) {
+    CalculatorViewModel(Calculator calculator) {
         display.setValue("0");
         this.calculator = calculator;
     }

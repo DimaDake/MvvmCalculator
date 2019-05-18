@@ -43,8 +43,9 @@ public class TestViewModel {
         calculatorViewModel.onDigitButtonClicked('2');
         calculatorViewModel.onDigitButtonClicked('0');
         assertEquals("20+20", calculatorViewModel.getScreenLiveData().getValue());
+        Mockito.when(calculator.result("20+20=")).thenReturn((long)40);
         calculatorViewModel.onEqualsButtonClicked();
-        Mockito.when(calculator.getResult()).thenReturn((long)40);
+        assertEquals("40", calculatorViewModel.getScreenLiveData().getValue());
         calculatorViewModel.onAcButtonClicked();
         assertEquals("0", calculatorViewModel.getScreenLiveData().getValue());
     }
@@ -59,8 +60,9 @@ public class TestViewModel {
         calculatorViewModel.onDigitButtonClicked('0');
         calculatorViewModel.onDigitButtonClicked('0');
         assertEquals("400-200", calculatorViewModel.getScreenLiveData().getValue());
+        Mockito.when(calculator.result("400-200=")).thenReturn((long) 200);
         calculatorViewModel.onEqualsButtonClicked();
-        Mockito.when(calculator.getResult()).thenReturn((long) 200);
+        assertEquals("200", calculatorViewModel.getScreenLiveData().getValue());
         calculatorViewModel.onAcButtonClicked();
         assertEquals("0", calculatorViewModel.getScreenLiveData().getValue());
     }
