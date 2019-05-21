@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CalculatorActivity">
 
     <EditText
-        android:background="@android:color/white"
+        android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        tools:text="140"
+        android:background="@android:color/white"
         android:gravity="right"
-        android:padding="12dp"/>
+        android:padding="12dp"
+        tools:text="140" />
 
     <GridLayout
         android:id="@+id/buttonGrid"
@@ -26,58 +27,72 @@
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="7" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="8" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="9" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="4" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="5" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="6" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="1" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="2" />
 
         <Button
             style="@style/MyButton"
-            android:text="3"/>
+            android:onClick="onButtonClick"
+            android:text="3" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='+' />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='0' />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='=' />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='-' />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='AC' />
 
         <Space />
