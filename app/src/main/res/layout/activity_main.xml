@@ -8,6 +8,7 @@
     tools:context=".CalculatorActivity">
 
     <EditText
+        android:id="@+id/activity_main_result_edit_text"
         android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,58 +27,72 @@
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="7" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="8" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="9" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="4" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="5" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="6" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="1" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="2" />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text="3"/>
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='+' />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='0' />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='=' />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='-' />
 
         <Button
             style="@style/MyButton"
+            android:onClick="onButtonClick"
             android:text='AC' />
 
         <Space />
