@@ -4,10 +4,13 @@ import com.example.myapplication.model.CalculatorModel;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.Random;
+
+import static org.junit.Assert.assertEquals;
 
 public class Model {
     private CalculatorModel calculatorModel = new CalculatorModel();
+    private Random random = new Random();
 
     @Test
     public void sum1(){
@@ -32,5 +35,24 @@ public class Model {
     public void subtract_with_negative(){
         calculatorModel.setData(227);
         assertEquals(227 + 1488, calculatorModel.subtract(-1488));
+    }
+    @Test
+    public void randomTest(){
+        for (int i = 0; i < 100; i++){
+            int firstArg = random.nextInt();
+            int secondArg = random.nextInt();
+            boolean isPlus = random.nextBoolean();
+            int equals = isPlus ? firstArg + secondArg : firstArg - secondArg;
+
+            calculatorModel.setData(firstArg);
+            if (isPlus){
+                calculatorModel.setOperation(CalculatorModel.Operation.PLUS);
+            } else {
+                calculatorModel.setOperation(CalculatorModel.Operation.MINUS);
+            }
+
+            int result = calculatorModel.doOperation(secondArg);
+            assertEquals(equals, result);
+        }
     }
 }

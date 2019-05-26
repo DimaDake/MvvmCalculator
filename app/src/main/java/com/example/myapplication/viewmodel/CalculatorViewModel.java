@@ -11,11 +11,16 @@ import static com.example.myapplication.model.CalculatorModel.Operation;
 public class CalculatorViewModel extends ViewModel {
 
     private final MutableLiveData<String> screenData = new MutableLiveData<>();
+    private final CalculatorModel model;
     private boolean isContinueInput = false;
-    private CalculatorModel model = new CalculatorModel();
 
     public CalculatorViewModel(){
+        this(new CalculatorModel());
+    }
+
+    public CalculatorViewModel(final CalculatorModel model){
         screenData.setValue("0");
+        this.model = model;
     }
 
     public LiveData<String> getScreenLiveData() {
@@ -60,7 +65,9 @@ public class CalculatorViewModel extends ViewModel {
     }
 
     public void onAcButtonClicked() {
-        model.clear();
+        if (model != null){
+            model.clear();
+        }
         screenData.setValue("0");
         isContinueInput = false;
     }
