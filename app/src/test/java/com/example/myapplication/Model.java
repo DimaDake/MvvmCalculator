@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Model {
     private CalculatorModel calculatorModel = new CalculatorModel();
-    private Random random = new Random();
+    private Random random = new Random(88005553535L);
 
     @Test
     public void sum1(){

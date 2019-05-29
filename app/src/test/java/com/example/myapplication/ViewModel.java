@@ -11,18 +11,17 @@ import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
-//@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class ViewModel {
 
-//    @Mock
-//    CalculatorModel calculatorModel;
+    @Mock
+    CalculatorModel calculatorModel;
 
     private CalculatorViewModel calculatorViewModel;
     private Random random;
@@ -32,9 +31,9 @@ public class ViewModel {
 
     @Before
     public void before(){
-//        calculatorViewModel = new CalculatorViewModel(calculatorModel);
+        calculatorViewModel = new CalculatorViewModel(calculatorModel);
         calculatorViewModel = new CalculatorViewModel();
-        random = new Random();
+        random = new Random(88005553535L);
     }
 
     @Test
@@ -46,8 +45,6 @@ public class ViewModel {
         calculatorViewModel.onMinusButtonClicked();
         calculatorViewModel.onDigitButtonClicked('4');
         calculatorViewModel.onEqualsButtonClicked();
-
-//        Mockito.when(calculatorModel.getData()).thenReturn(18);
 
         assertEquals("18", calculatorViewModel.getScreenLiveData().getValue());
     }
@@ -67,7 +64,6 @@ public class ViewModel {
         calculatorViewModel.onDigitButtonClicked('7');
         calculatorViewModel.onEqualsButtonClicked();
 
-//        Mockito.when(calculatorModel.getData()).thenReturn(2852);
         assertEquals("2825", calculatorViewModel.getScreenLiveData().getValue());
     }
 
