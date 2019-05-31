@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 public class CalculatorActivity extends AppCompatActivity {
-
     private CalculatorViewModel viewModel;
     private EditText calcScreen;
 
@@ -19,7 +18,7 @@ public class CalculatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel.class);
-        calcScreen = findViewById(R.id.calcScreen);
+        calcScreen = findViewById(R.id.activity_main__calcScreen);
 
         final Observer<String> screenObserver = screenValue -> calcScreen.setText(screenValue);
 

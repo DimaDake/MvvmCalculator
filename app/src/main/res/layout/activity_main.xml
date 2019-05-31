@@ -7,7 +7,7 @@
     tools:context=".CalculatorActivity">
 
     <EditText
-        android:id="@+id/calcScreen"
+        android:id="@+id/activity_main__calcScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
@@ -17,7 +17,7 @@
         tools:text="140" />
 
     <GridLayout
-        android:id="@+id/buttonGrid"
+        android:id="@+id/activity_main__buttonGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
