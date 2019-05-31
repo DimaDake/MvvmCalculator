@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CalculatorActivity">
 
     <EditText
-        android:background="@android:color/white"
+        android:id="@+id/calcScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        tools:text="140"
+        android:background="@android:color/white"
         android:gravity="right"
-        android:padding="12dp"/>
+        android:padding="12dp"
+        tools:text="140" />
 
     <GridLayout
         android:id="@+id/buttonGrid"
@@ -26,59 +26,73 @@
 
         <Button
             style="@style/MyButton"
-            android:text="7" />
+            android:onClick="onButtonClick"
+            android:text="@string/seven" />
 
         <Button
             style="@style/MyButton"
-            android:text="8" />
+            android:onClick="onButtonClick"
+            android:text="@string/eight" />
 
         <Button
             style="@style/MyButton"
-            android:text="9" />
+            android:onClick="onButtonClick"
+            android:text="@string/nine" />
 
         <Button
             style="@style/MyButton"
-            android:text="4" />
+            android:onClick="onButtonClick"
+            android:text="@string/four" />
 
         <Button
             style="@style/MyButton"
-            android:text="5" />
+            android:onClick="onButtonClick"
+            android:text="@string/five" />
 
         <Button
             style="@style/MyButton"
-            android:text="6" />
+            android:onClick="onButtonClick"
+            android:text="@string/six" />
 
         <Button
             style="@style/MyButton"
-            android:text="1" />
+            android:onClick="onButtonClick"
+            android:text="@string/one" />
 
         <Button
             style="@style/MyButton"
-            android:text="2" />
+            android:onClick="onButtonClick"
+            android:text="@string/two" />
 
         <Button
             style="@style/MyButton"
-            android:text="3"/>
+            android:onClick="onButtonClick"
+            android:text="@string/three" />
 
         <Button
             style="@style/MyButton"
-            android:text='+' />
+            android:onClick="onButtonClick"
+            android:text="@string/plus" />
 
         <Button
             style="@style/MyButton"
-            android:text='0' />
+            android:onClick="onButtonClick"
+            android:text="@string/zero" />
 
         <Button
             style="@style/MyButton"
-            android:text='=' />
+            android:onClick="onButtonClick"
+            android:text="@string/equals" />
 
         <Button
             style="@style/MyButton"
-            android:text='-' />
+            android:onClick="onButtonClick"
+            android:text="@string/minus" />
 
         <Button
             style="@style/MyButton"
-            android:text='AC' />
+            android:onClick="onButtonClick"
+            android:text="@string/ac" />
 
         <Space />
 
