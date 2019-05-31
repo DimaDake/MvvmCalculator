@@ -1,31 +1,79 @@
 package com.example.myapplication;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class CalculatorViewModel extends ViewModel {
+    private final CalculatorModel calcModel;
+    private final MutableLiveData<String> value;
+    private boolean nextValue;
+    private char operation = '0';
+
+    public CalculatorViewModel() {
+        this(new CalculatorModel());
+    }
+
+    public CalculatorViewModel(final CalculatorModel calcModel) {
+        this.calcModel = calcModel;
+        value = new MutableLiveData<>();
+        value.setValue("0");
+        nextValue = true;
+    }
 
     public LiveData<String> getScreenLiveData() {
-        throw new UnsupportedOperationException("Implement this method!");
+        return value;
     }
 
     public void onDigitButtonClicked(char digit) {
-        throw new UnsupportedOperationException("Implement this method!");
+        if (!Character.isDigit(digit)) {
+            return;
+        }
+        if (nextValue || getValue() == 0) {
+            value.setValue("");
+            nextValue = false;
+        }
+        value.setValue(value.getValue() + digit);
     }
 
     public void onPlusButtonClicked() {
-        throw new UnsupportedOperationException("Implement this method!");
+        onEqualsButtonClicked();
+        operation = '+';
     }
 
     public void onMinusButtonClicked() {
-        throw new UnsupportedOperationException("Implement this method!");
+        onEqualsButtonClicked();
+        operation = '-';
     }
 
     public void onEqualsButtonClicked() {
-        throw new UnsupportedOperationException("Implement this method!");
+        if (operation != '0') {
+            switch (operation) {
+                case '+':
+                    calcModel.addition(getValue());
+                    break;
+                case '-':
+                    calcModel.subtraction(getValue());
+                    break;
+            }
+        } else {
+            calcModel.setValue(getValue());
+        }
+        nextValue = true;
+        operation = '0';
+        value.setValue(Integer.toString(calcModel.getValue()));
     }
 
     public void onAcButtonClicked() {
-        throw new UnsupportedOperationException("Implement this method!");
+        value.setValue("0");
+        calcModel.clean();
+        operation = '0';
+        nextValue = true;
+    }
+
+    private int getValue() {
+        return value.getValue().length() > 0 ?
+                Integer.parseInt(value.getValue()) :
+                0;
     }
 }
