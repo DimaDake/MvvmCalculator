@@ -1,31 +1,80 @@
 package com.example.myapplication;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class CalculatorViewModel extends ViewModel {
 
+    private final CalculatorModel calculatorModel;
+    private final MutableLiveData<String> valueOnScreen;
+    private Operation operation;
+    private boolean writeNextValue;
+
+    enum Operation {
+        PLUS,
+        MINUS
+    }
+
+    public CalculatorViewModel(final CalculatorModel calculatorModel) {
+        this.calculatorModel = calculatorModel;
+        this.valueOnScreen = new MutableLiveData<>();
+        this.valueOnScreen.setValue("0");
+        this.writeNextValue = true;
+    }
+
     public LiveData<String> getScreenLiveData() {
-        throw new UnsupportedOperationException("Implement this method!");
+        return valueOnScreen;
     }
 
     public void onDigitButtonClicked(char digit) {
-        throw new UnsupportedOperationException("Implement this method!");
+        if (writeNextValue || getValueOnScreen() == 0) {
+            valueOnScreen.setValue("");
+            writeNextValue = false;
+        }
+        valueOnScreen.setValue(valueOnScreen.getValue() + digit);
     }
 
     public void onPlusButtonClicked() {
-        throw new UnsupportedOperationException("Implement this method!");
+        onEqualsButtonClicked();
+        operation = Operation.PLUS;
     }
 
     public void onMinusButtonClicked() {
-        throw new UnsupportedOperationException("Implement this method!");
+        onEqualsButtonClicked();
+        operation = Operation.MINUS;
     }
 
     public void onEqualsButtonClicked() {
-        throw new UnsupportedOperationException("Implement this method!");
+        if (operation != null) {
+            switch (operation) {
+                case PLUS:
+                    calculatorModel.plus(getValueOnScreen());
+                    break;
+                case MINUS:
+                    calculatorModel.minus(getValueOnScreen());
+                    break;
+            }
+        } else {
+            calculatorModel.setValue(getValueOnScreen());
+        }
+        writeNextValue = true;
+        operation = null;
+        valueOnScreen.setValue(Integer.toString(calculatorModel.getValue()));
     }
 
     public void onAcButtonClicked() {
-        throw new UnsupportedOperationException("Implement this method!");
+        valueOnScreen.setValue("0");
+        calculatorModel.clean();
+        operation = null;
+        writeNextValue = true;
+    }
+
+    private int getValueOnScreen() {
+        if (valueOnScreen.getValue().length() > 0) {
+            return Integer.parseInt(valueOnScreen.getValue());
+        } else {
+            return 0;
+        }
     }
 }
