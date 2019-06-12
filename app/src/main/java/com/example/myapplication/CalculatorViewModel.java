@@ -16,7 +16,12 @@ public class CalculatorViewModel extends ViewModel {
         MINUS
     }
 
-    public CalculatorViewModel(final CalculatorModel calculatorModel) {
+    public CalculatorViewModel() {
+        this(new CalculatorModel());
+    }
+
+
+    public CalculatorViewModel(CalculatorModel calculatorModel) {
         this.calculatorModel = calculatorModel;
         this.valueOnScreen = new MutableLiveData<>();
         this.valueOnScreen.setValue("0");
